@@ -1,0 +1,22 @@
+
+
+git merge --no-ff page-1 page-2 page-3
+
+*---.   9827324 (HEAD -> demo) Merge branches 'page-1', 'page-2' and 'page-3' into demo
+|\ \ \
+| | | * f768828 (page-3) 2 : page-3.html
+| | | * ccdb366 1 : page-3.html
+| |_|/
+|/| |
+| | * 272ab4e (page-2) 5 : page-2.html
+| | * 39b19f8 4 : page-2.html
+| | * bc1c20a 3 : page-2.html
+| | * 105db69 2 : page-2.html
+| | * 06290c2 1 : page-2.html
+| |/
+|/|
+| * f6415a7 (page-1) 3 : page-1.html
+| * 419e82f 2 : page-1.html
+| * 5c8a77c 1 : page-1.html
+|/
+* da0e93e (master) f1

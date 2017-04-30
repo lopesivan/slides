@@ -1,0 +1,22 @@
+% echo "Change" >> INSTALL
+% git add INSTALL
+% echo "Another change" >> INSTALL
+
+
+
+
+
+
+
+# ✓ O conteúdo do arquivo INSTALL é "Change"
+# ✓ Adicionei o arquivo INSTALL na "staging area"
+# ► O conteúdo do arquivo INSTALL é modificado para "Another Change"
+
+
+
+
+
+
+
+
+___

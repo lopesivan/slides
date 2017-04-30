@@ -1,0 +1,13 @@
+tempdir=$(mktemp -d -t testing.XXXX)
+cd $tempdir
+git init foo
+cd foo
+git estudo m{1..3}
+git branch feature
+git co feature
+git estudo f{1..3}
+git co master
+git estudo m{4..5}
+git co feature
+git rebase master
+

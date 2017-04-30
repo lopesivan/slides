@@ -1,0 +1,220 @@
+tempdir=$(mktemp -d -t testing.XXXX)
+cd $tempdir
+
+project_name=parser
+task=ls
+test=test-${task}
+refactor=modules
+
+bang new $project_name
+cd $project_name
+git init
+
+# ############################################################################
+# 1
+# ############################################################################
+
+git add .projections.json
+git add .
+git commit -m "first commit"
+
+echo Elabora o novo task \`${task}\' >> README
+git add README
+git commit -m "Adiciona README"
+
+# ############################################################################
+# 2
+# ############################################################################
+
+git branch $test
+git checkout $test
+
+echo Cria o teste tests/tasks/${task}_test.sh >> README
+git add README
+git commit -m "[branch:test-${task}] e atualiza README"
+
+mkdir -p tests/tasks/
+echo edita... > tests/tasks/${task}_test.sh
+git add tests/tasks/${task}_test.sh
+git commit -m "Adiciona ${task}_test.sh"
+
+# RED
+echo Executa o teste: >> README
+echo bang test tests/tasks/${task}_test.sh >> README
+git add README
+git commit -m "Atualiza README"
+
+echo retorno: todos os testes falham >> README
+git add README
+git commit -m "Atualiza README e todos os testes falham"
+
+# ############################################################################
+# 3
+# ############################################################################
+
+git branch $task
+git checkout $task
+
+echo Cria o task tasks/${task}.sh >> README
+git add README
+git commit -m "[branch:${task}] e atualiza README"
+
+echo edita... > tasks/${task}.sh
+git add tasks/${task}.sh
+git commit -m "Adiciona ${task}.sh"
+
+# GREEN
+echo Executa o teste: >> README
+echo bang test tests/tasks/${task}_test.sh >> README
+git add README
+git commit -m "Atualiza README"
+
+echo retorno: todos os testes funcionam >> README
+git add README
+git commit -m "Atualiza README e todos os testes funcionam"
+
+# ############################################################################
+# 4
+# ############################################################################
+
+git branch $refactor
+git checkout $refactor
+
+echo Cria o modulo modules/o${task}.sh >> README
+git add README
+git commit -m "[branch:${refactor}] e atualiza README"
+
+echo edita... > modules/o${task}.sh
+git add  modules/o${task}.sh
+git commit -m "Adiciona o${task}.sh"
+
+# BLUE
+echo Executa o teste: >> README
+echo bang test tests/tasks/${task}_test.sh >> README
+git add README
+git commit -m "Atualiza README"
+
+echo retorno: todos os testes funcionam após o refactoring >> README
+git add README
+git commit -m "Atualiza README e todos os testes funcionam após o refactoring"
+
+echo rebase >> README
+git add README
+git commit -m "[rebase $task $refactor] e atualiza README"
+
+git checkout $task
+git rebase $refactor
+
+# ############################################################################
+# 5
+# ############################################################################
+
+echo modifica ... >> README
+
+# GREEN
+echo Executa o teste: >> README
+echo bang test tests/tasks/${task}_test.sh >> README
+git add README
+git commit -m "Atualiza README"
+
+echo retorno: todos os testes funcionam >> README
+git add README
+git commit -m "Atualiza README e todos os testes funcionam"
+
+echo rebase >> README
+git add README
+git commit -m "[rebase $test $task] e atualiza README"
+
+git checkout $test
+git rebase $task
+
+
+# ############################################################################
+# 6
+# ############################################################################
+
+echo modifica ... >> README
+
+# GREEN
+echo Executa o teste: >> README
+echo bang test tests/tasks/${task}_test.sh >> README
+git add README
+git commit -m "Atualiza README"
+
+echo retorno: todos os testes funcionam >> README
+git add README
+git commit -m "Atualiza README e todos os testes funcionam"
+
+echo rebase >> README
+git add README
+git commit -m "[rebase master $test] e atualiza README"
+
+git checkout master
+git rebase $test
+
+# ############################################################################
+# 7
+# ############################################################################
+
+echo modifica ... >> README
+
+# GREEN
+echo Executa o teste: >> README
+echo bang test tests/tasks/${task}_test.sh >> README
+git add README
+git commit -m "Atualiza README"
+
+echo retorno: todos os testes funcionam >> README
+git add README
+git commit -m "Atualiza README e todos os testes funcionam"
+
+# ############################################################################
+# 8
+# ############################################################################
+
+git branch doc
+git checkout doc
+
+echo Cria o ${task}.md >> README
+git add README
+git commit -m "[branch:doc] e atualiza README"
+
+mkdir -p doc/tasks
+echo edita... > doc/tasks/${task}.md
+git add doc/tasks/${task}.md
+git commit -m "Adiciona ${task}.md"
+
+# GREEN
+echo Executa o teste: >> README
+echo bang test tests/tasks/${task}_test.sh >> README
+git add README
+git commit -m "Atualiza README"
+
+echo retorno: todos os testes funcionam >> README
+git add README
+git commit -m "Atualiza README e todos os testes funcionam"
+
+echo rebase >> README
+git add README
+git commit -m "[rebase master doc] e atualiza README"
+
+git checkout master
+git rebase doc
+
+
+# ############################################################################
+# 9
+# ############################################################################
+
+echo modifica ... >> README
+
+# GREEN
+echo Executa o teste: >> README
+echo bang test tests/tasks/${task}_test.sh >> README
+git add README
+git commit -m "Atualiza README"
+
+echo retorno: todos os testes funcionam >> README
+git add README
+git commit -m "Atualiza README e todos os testes funcionam"
+

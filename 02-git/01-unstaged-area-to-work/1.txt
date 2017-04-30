@@ -1,0 +1,22 @@
+% echo "Change" >> INSTALL
+
+
+
+
+
+
+
+
+
+# ► O conteúdo do arquivo INSTALL é "Change"
+
+
+
+
+
+
+
+
+
+
+___
